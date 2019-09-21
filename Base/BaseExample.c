@@ -6,11 +6,16 @@
 // 注意DEF和IMPL参数需要一致
 static inline Swap_IMPL(Byte);
 Pair_DEF(Byte, Word);
-Pair_IMPL(Byte, Word);
 Array_DEF(Word, 10);
 Array_IMPL(Word, 10);
 Bytes_DEF(20);
 Bytes_IMPL(20);
+
+typedef void (*PrintFunc) (const Word*);
+ForInRange_IMPL(Array(Word, 10), PrintFunc);
+static inline void PrintWord(const Word* w) {
+    printf("0x%x\n", *w);
+}
 
 // 示例
 void NfLib_Base_Example(void) {
@@ -64,11 +69,12 @@ void NfLib_Base_Example(void) {
     Array(Word, 10, _Init) (&words);
     words.ops->Push(&words, 0x1234);
     words.ops->Push(&words, 0x5678);
-    for (i = 0; i < words.size; ++i) {
-        printf("0x%x\n", words.data[i]);
-    }
+
+    // 这里可以用ForInRange来打印数据
+    ForInRange(Array(Word, 10), PrintFunc) (&words, PrintWord);
     // printf: 0x1234, 0x5678
     words.ops->Pop(&words, &word);
+    // 也可以用传统的方法打印数据
     for (i = 0; i < words.size; ++i) {
         printf("0x%x\n", words.data[i]);
     }
@@ -81,6 +87,7 @@ void NfLib_Base_Example(void) {
     Bytes(20, _Init) (&bytes);
     bytes.ops->Push(&bytes, 0x12);
     bytes.ops->Push(&bytes, 0x34);
+
     for (i = 0; i < bytes.size; ++i) {
         printf("0x%x\n", bytes.data[i]);
     }
