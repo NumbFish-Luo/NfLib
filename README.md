@@ -3,6 +3,34 @@
 
 https://github.com/NumbFish-Luo/NfLib
 
+画风大概如下例所示：
+
+```c
+#include "Array.h"
+#include <stdio.h>
+
+// 必须要代替编译器手动实现该类型
+// 手动实现Array(int, 10)
+Array_DEF(int, 10);
+Array_IMPL(int, 10);
+
+// 手动实现ForInRange
+typedef void (*PrintFunc) (const int*);
+ForInRange_IMPL(Array(int, 10), PrintFunc);
+static inline void Print(const int* i) {
+    printf("%d\n", *i);
+}
+
+void Example() {
+    Array(int, 10) arr; // 创建容量为10的数组
+    Array(int, 10, _Init) (&arr); // 初始化
+    arr.ops->Push(&arr, 123);
+    arr.ops->Push(&arr, 456);
+    ForInRange(Array(int, 10), PrintFunc) (&arr, Print);
+}
+
+```
+
 ---
 
 Array: 动态记录size的数组（可用，但还在完善中）
