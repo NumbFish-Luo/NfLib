@@ -27,6 +27,10 @@ void Example() {
     arr.ops->Push(&arr, 123);
     arr.ops->Push(&arr, 456);
     ForInRange(Array(int, 10), PrintFunc) (&arr, Print);
+    /*
+        123
+        456
+    */
 }
 
 ```
