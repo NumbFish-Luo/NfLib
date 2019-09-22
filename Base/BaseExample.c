@@ -1,5 +1,15 @@
-#include "BaseExample.h"
 #include <stdio.h>
+#include "BaseExample.h"
+
+#include "Array.h"
+#include "Base.h"
+#include "Bytes.h"
+#include "ForEach.h"
+#include "ForInRange.h"
+#include "Layer.h"
+#include "Pair.h"
+#include "Swap.h"
+#include "Type.h"
 
 // C不是C++, 要事先定义好各种模板
 // DEF和IMPL可以分离, 一般DEF放在.h中, IMPL放在.c中
