@@ -37,6 +37,8 @@ void Example() {
 
 ---
 
+## NfLib/Base
+
 Array: 动态记录size的数组（可用，但还在完善中）
 
 Bytes: 等价于Array(Byte, ...)
@@ -55,4 +57,14 @@ Type: 基础类型定义
 
 ---
 
-BaseExample: Base部分使用示例
+## NfLib/Fsm
+
+Fsm: 有限状态机, 创建节点(FsmNode), 线(FsmLine), 然后加入状态机内. 使用方法见NfLib/Example/Fsm_Example.c
+
+---
+
+## NfLib/Example
+
+Base_Example: Base部分使用示例
+
+Fsm_Example: 有限状态机部分使用示例
