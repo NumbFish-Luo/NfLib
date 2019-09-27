@@ -1,14 +1,14 @@
 #include "FsmLine.h"
 
 void FsmLine_Init(
-    FsmLine* line,
+    FsmLine* this,
     FsmNode* prevNode,
     FsmNode* nextNode,
     FsmLineName name,
     FsmCall Func
 ) {
-    line->prevNode = prevNode;
-    line->nextNode = nextNode;
-    line->name = name;
-    line->Func = Func;
+    this->prevNode = prevNode;
+    this->nextNode = nextNode;
+    this->name = name;
+    this->Func = Func;
 }

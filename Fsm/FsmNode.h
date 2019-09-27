@@ -11,7 +11,7 @@ struct FsmNode {
 };
 
 void FsmNode_Init(
-    FsmNode*    node, // 节点
+    FsmNode*    this, // 节点
     FsmNodeName name, // 节点名称
     FsmCall     Func  // 处于该节点时持续运行的函数
 );

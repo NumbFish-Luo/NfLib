@@ -10,11 +10,14 @@
 #include <NfLib/Base/Pair.h>
 #include <NfLib/Base/Swap.h>
 #include <NfLib/Base/Type.h>
+#include <NfLib/Base/Max_Min.h>
 
 // C不是C++, 要事先定义好各种模板
 // DEF和IMPL可以分离, 一般DEF放在.h中, IMPL放在.c中
 // 注意DEF和IMPL参数需要一致
 static inline Swap_IMPL(Byte);
+static inline Max_IMPL(Byte);
+static inline Min_IMPL(Byte);
 Pair_DEF(Byte, Word);
 Array_DEF(Word, 10);
 Array_IMPL(Word, 10);
@@ -23,9 +26,7 @@ Bytes_IMPL(20);
 
 typedef void (*PrintFunc) (const Word*);
 ForInRange_IMPL(Array(Word, 10), PrintFunc);
-static inline void PrintWord(const Word* w) {
-    printf("0x%X\n", *w);
-}
+static inline void PrintWord(const Word* w) { printf("0x%X\n", *w); }
 
 // 示例
 void Base_Example(void) {
@@ -67,6 +68,9 @@ void Base_Example(void) {
     printf("0x%X, 0x%X\n", byte1, byte2);
     // >> 0xFF, 0x80
     
+    // Max Min /////////////////////////////////////////////////////////////////
+    printf("\nMax = 0x%x, Min = 0x%x\n", Max(Byte)(byte1, byte2), Min(Byte)(byte1, byte2));
+
     // Pair ////////////////////////////////////////////////////////////////////
     pair.t1 = byte1;
     pair.t2 = word;
@@ -77,14 +81,14 @@ void Base_Example(void) {
     printf("\nArray:\n");
     // 有Init的类在使用之前要记得初始化
     Array(Word, 10, _Init) (&words);
-    words.ops->Push(&words, 0x1234);
-    words.ops->Push(&words, 0x5678);
+    words.ops->PushBack(&words, 0x1234);
+    words.ops->PushBack(&words, 0x5678);
 
     // 这里可以用ForInRange来打印数据
     ForInRange(Array(Word, 10), PrintFunc) (&words, PrintWord);
     // >> 0x1234
     // >> 0x5678
-    words.ops->Pop(&words, &word);
+    words.ops->PopBack(&words, &word);
     // 也可以用传统的方法打印数据
     for (i = 0; i < words.size; ++i) {
         printf("0x%X\n", words.data[i]);
@@ -96,15 +100,15 @@ void Base_Example(void) {
     // Bytes(相当于Array(Byte, SIZE)) //////////////////////////////////////////
     printf("\nBytes(相当于Array(Byte, SIZE)):\n");
     Bytes(20, _Init) (&bytes);
-    bytes.ops->Push(&bytes, 0x12);
-    bytes.ops->Push(&bytes, 0x34);
+    bytes.ops->PushBack(&bytes, 0x12);
+    bytes.ops->PushBack(&bytes, 0x34);
 
     for (i = 0; i < bytes.size; ++i) {
         printf("0x%X\n", bytes.data[i]);
     }
     // >> 0x12
     // >> 0x34
-    bytes.ops->Pop(&bytes, &byte1);
+    bytes.ops->PopBack(&bytes, &byte1);
     for (i = 0; i < bytes.size; ++i) {
         printf("0x%X\n", bytes.data[i]);
     }

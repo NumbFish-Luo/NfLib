@@ -19,6 +19,7 @@ static void Call_Line2(void) { testLineVal = 2; }
 static void Call_Line3(void) { testLineVal = 3; }
 
 void Fsm_Example(void) {
+    u16 i = 0;
     char eventNameStr[16] = { "FsmLine_None" };
     FsmEventName eventName = FsmLine_None;
 

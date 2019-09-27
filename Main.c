@@ -1,13 +1,10 @@
 #include <stdio.h>
 #include "Example/BaseExample.h"
 #include "Example/FsmExample.h"
+#include "Example/MapExample.h"
 
 int main() {
-    printf("\n/*** [Base_Example] ***/\n");
     Base_Example();
-
-    printf("\n/*** [Fsm_Example] ***/\n");
-    Fsm_Example();
-    
+    Map_Example();
     return 0;
 }

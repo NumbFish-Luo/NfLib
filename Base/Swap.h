@@ -10,7 +10,7 @@
 #define Swap_DEF(T) _Swap_DEF(T)
 
 // IMPL ////////////////////////////////////////////////////////////////////////
-#define _Swap_IMPL(T) void Swap(T)(T* lhs, T* rhs) {                            \
+#define _Swap_IMPL(T) Swap_DEF(T) {                                             \
     T tmp;                                                                      \
     tmp = *lhs;                                                                 \
     *lhs = *rhs;                                                                \

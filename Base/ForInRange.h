@@ -17,7 +17,7 @@ void ForInRange(TYPE, FUNC) (TYPE* data, FUNC Func)
 #define _ForInRange_IMPL(TYPE, FUNC)                                            \
 ForEach_IMPL(TYPE##_Iter, FUNC);                                                \
 void ForInRange(TYPE, FUNC) (TYPE* data, FUNC Func) {                           \
-    ForEach(TYPE##_Iter, FUNC) (data->ops->Begin(data), data->ops->End(data), Func); \
+    ForEach(TYPE##_Iter, FUNC) (data->ops->Begin(data), data->ops->End(data), data->ops->IterNext, Func); \
 }
 #define ForInRange_IMPL(TYPE, FUNC) _ForInRange_IMPL(TYPE, FUNC)
 

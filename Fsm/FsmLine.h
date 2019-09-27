@@ -11,7 +11,7 @@ struct FsmLine {
 };
 
 void FsmLine_Init(
-    FsmLine*    line,     // 线
+    FsmLine*    this,     // 线
     FsmNode*    prevNode, // 上一个节点
     FsmNode*    nextNode, // 下一个节点
     FsmLineName name,     // 线名称

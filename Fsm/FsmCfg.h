@@ -33,9 +33,9 @@ enum FsmNodeName {
 // ÏßÃû³Æ
 enum FsmLineName {
     FsmLine_None = 0, // ÎÞ
-    FsmLine_1 = 1, // 1
-    FsmLine_2 = 2, // 2
-    FsmLine_3 = 3  // 3
+    FsmLine_1    = 1, // 1
+    FsmLine_2    = 2, // 2
+    FsmLine_3    = 3  // 3
 };
 
 #endif // FSM_CFG_H

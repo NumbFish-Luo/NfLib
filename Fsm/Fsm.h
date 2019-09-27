@@ -13,12 +13,12 @@ struct Fsm {
 };
 
 struct Fsm_ops {
-    Bool (*AddNode)(Fsm* fsm, FsmNode* node);        // 添加节点
-    Bool (*AddLine)(Fsm* fsm, FsmLine* line);        // 添加线
-    Bool (*Start)(Fsm* fsm, FsmNodeName name);       // 设置开始节点
-    Bool (*HandleEvent)(Fsm* fsm, FsmLineName name); // 处理事件
+    Bool (*AddNode)(Fsm* this, FsmNode* node);        // 添加节点
+    Bool (*AddLine)(Fsm* this, FsmLine* line);        // 添加线
+    Bool (*Start)(Fsm* this, FsmNodeName name);       // 设置开始节点
+    Bool (*HandleEvent)(Fsm* this, FsmLineName name); // 处理事件
 };
 
-void Fsm_Init(Fsm* fsm);
+void Fsm_Init(Fsm* this);
 
 #endif // NFLIB_FSM_H

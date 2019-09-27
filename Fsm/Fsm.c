@@ -1,27 +1,31 @@
 #include "FSM.h"
 
+#define size this->size
+#define nodes this->nodes
+#define currNode this->currNode
+
 // 添加节点
-static Bool AddNode(Fsm* fsm, FsmNode* node) {
-    if (fsm == 0 || node == 0 || fsm->size >= Fsm_MaxNodeNum) {
+static Bool AddNode(Fsm* this, FsmNode* node) {
+    if (node == 0 || size >= Fsm_MaxNodeNum) {
         return False; // 指针为空, 或节点数量将大于最大容量
     }
-    fsm->nodes[fsm->size++] = node;
+    nodes[size++] = node;
     return True;
 }
 
 // 添加线
-static Bool AddLine(Fsm* fsm, FsmLine* line) {
+static Bool AddLine(Fsm* this, FsmLine* line) {
     u8 i = 0;
-    if (fsm == 0 || line == 0 || line->prevNode == 0) {
+    if (line == 0 || line->prevNode == 0) {
         return False; // 指针为空
     }
-    for (; i < fsm->size; ++i) {
-        if (fsm->nodes[i] != 0) {
-            if (line->prevNode->name == fsm->nodes[i]->name) {
-                if (fsm->nodes[i]->lineSize >= FsmNode_MaxLineNum) {
+    for (; i < size; ++i) {
+        if (nodes[i] != 0) {
+            if (line->prevNode->name == nodes[i]->name) {
+                if (nodes[i]->lineSize >= FsmNode_MaxLineNum) {
                     return False; // 超出最大容量
                 }
-                fsm->nodes[i]->lines[fsm->nodes[i]->lineSize++] = line;
+                nodes[i]->lines[nodes[i]->lineSize++] = line;
                 return True;
             }
         }
@@ -30,20 +34,17 @@ static Bool AddLine(Fsm* fsm, FsmLine* line) {
 }
 
 // 设置开始节点
-static Bool Start(Fsm* fsm, FsmNodeName name) {
+static Bool Start(Fsm* this, FsmNodeName name) {
     u8 i = 0;
-    if (fsm == 0) {
-        return False;
-    }
-    for (; i < fsm->size; ++i) {
-        if (fsm->nodes[i] != 0) {
-            if (name == fsm->nodes[i]->name) {
-                fsm->currNode = fsm->nodes[i];
+    for (; i < size; ++i) {
+        if (nodes[i] != 0) {
+            if (name == nodes[i]->name) {
+                currNode = nodes[i];
                 return True;
             }
         }
     }
-    fsm->currNode = 0;
+    currNode = 0;
     return False;
 }
 
@@ -51,26 +52,26 @@ static Bool Start(Fsm* fsm, FsmNodeName name) {
 static inline void SafeDelay(u32 delay) { if (delay > 0) { while(--delay); } }
 
 // 处理事件
-static Bool HandleEvent(Fsm* fsm, FsmLineName name) {
+static Bool HandleEvent(Fsm* this, FsmLineName name) {
     u8 i = 0;
     // SafeDelay(100); // 对于lpc1788芯片, 必须延时, 否则程序会死, 自动重启
-    if (fsm == 0 || fsm->currNode == 0 || fsm->currNode->Func == 0) {
+    if (currNode == 0 || currNode->Func == 0) {
         return False;
     }
-    fsm->currNode->Func();
+    currNode->Func();
     if (name == FsmLine_None) {
         return False;
     }
-    for (; i < fsm->currNode->lineSize; ++i) {
-        if (fsm->currNode != 0
-            && fsm->currNode->lines[i] != 0
-            && fsm->currNode->lines[i]->name == name
+    for (; i < currNode->lineSize; ++i) {
+        if (currNode != 0
+            && currNode->lines[i] != 0
+            && currNode->lines[i]->name == name
         ) {
-            if (fsm->currNode->lines[i]->Func != 0) {
-                fsm->currNode->lines[i]->Func();
+            if (currNode->lines[i]->Func != 0) {
+                currNode->lines[i]->Func();
             }
-            fsm->currNode = fsm->currNode->lines[i]->nextNode;
-            fsm->currNode->Func();
+            currNode = currNode->lines[i]->nextNode;
+            currNode->Func();
             return True;
         }
     }
@@ -91,12 +92,16 @@ static Fsm_ops* FsmOps(void) {
 }
 
 // 初始化状态机
-void Fsm_Init(Fsm* fsm) {
+void Fsm_Init(Fsm* this) {
     u8 i = 0;
-    fsm->currNode = 0;
+    currNode = 0;
     for (; i < Fsm_MaxNodeNum; ++i) {
-        fsm->nodes[i] = 0;
+        nodes[i] = 0;
     }
-    fsm->size = 0;
-    fsm->ops = FsmOps();
+    size = 0;
+    this->ops = FsmOps();
 }
+
+#undef size
+#undef nodes
+#undef currNode
