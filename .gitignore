@@ -50,3 +50,7 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+x64
+.vs/NfLib/v16/ipch
+.vs/NfLib/v16/Browse.VC.db
+NfLib/x64
