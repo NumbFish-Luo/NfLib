@@ -32,9 +32,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Examples.h">
-      <Filter>Example</Filter>
-    </ClInclude>
     <ClInclude Include="Include\NfLib\Array.h">
       <Filter>Include\Base</Filter>
     </ClInclude>
@@ -65,14 +62,11 @@
     <ClInclude Include="Include\NfLib\TaskRevolver.h">
       <Filter>Include\TaskRevolver</Filter>
     </ClInclude>
+    <ClInclude Include="Example\Examples.h">
+      <Filter>Example</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BaseExample.c">
-      <Filter>Example</Filter>
-    </ClCompile>
-    <ClCompile Include="ArrayExample.c">
-      <Filter>Example</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Base.c">
       <Filter>Source\Base</Filter>
     </ClCompile>
@@ -85,15 +79,21 @@
     <ClCompile Include="Source\FsmNode.c">
       <Filter>Source\Fsm</Filter>
     </ClCompile>
-    <ClCompile Include="FsmExample.c">
-      <Filter>Example</Filter>
-    </ClCompile>
-    <ClCompile Include="TaskRevolverExample.c">
-      <Filter>Example</Filter>
-    </ClCompile>
     <ClCompile Include="Source\TaskRevolver.c">
       <Filter>Source\TaskRevolver</Filter>
     </ClCompile>
     <ClCompile Include="Main.c" />
+    <ClCompile Include="Example\ArrayExample.c">
+      <Filter>Example</Filter>
+    </ClCompile>
+    <ClCompile Include="Example\BaseExample.c">
+      <Filter>Example</Filter>
+    </ClCompile>
+    <ClCompile Include="Example\FsmExample.c">
+      <Filter>Example</Filter>
+    </ClCompile>
+    <ClCompile Include="Example\TaskRevolverExample.c">
+      <Filter>Example</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

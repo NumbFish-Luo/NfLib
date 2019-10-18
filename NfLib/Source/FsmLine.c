@@ -1,6 +1,8 @@
 #include <NfLib/FsmLine.h>
+#include <string.h>
 
-// ³õÊ¼»¯Ïß
+#pragma warning(disable : 4996)
+
 FsmLine* FsmLine_Init(
     FsmLine*    this,
     FsmNode*    prevNode,

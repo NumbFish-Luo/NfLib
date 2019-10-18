@@ -6,7 +6,7 @@
 struct FsmLine {
     FsmNode*    prevNode;
     FsmNode*    nextNode;
-    const char  name[FsmName_MaxLen];
+    char        name[FsmName_MaxLen];
     FsmLineCall Func;
 };
 

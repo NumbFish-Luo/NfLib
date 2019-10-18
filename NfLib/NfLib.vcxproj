@@ -128,7 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Examples.h" />
+    <ClInclude Include="Example\Examples.h" />
     <ClInclude Include="Include\NfLib\Array.h" />
     <ClInclude Include="Include\NfLib\Base.h" />
     <ClInclude Include="Include\NfLib\Fsm.h" />
@@ -141,16 +141,16 @@
     <ClInclude Include="Include\NfLib\TaskRevolver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ArrayExample.c" />
-    <ClCompile Include="BaseExample.c" />
-    <ClCompile Include="FsmExample.c" />
+    <ClCompile Include="Example\ArrayExample.c" />
+    <ClCompile Include="Example\BaseExample.c" />
+    <ClCompile Include="Example\FsmExample.c" />
+    <ClCompile Include="Example\TaskRevolverExample.c" />
     <ClCompile Include="Main.c" />
     <ClCompile Include="Source\Base.c" />
     <ClCompile Include="Source\Fsm.c" />
     <ClCompile Include="Source\FsmLine.c" />
     <ClCompile Include="Source\FsmNode.c" />
     <ClCompile Include="Source\TaskRevolver.c" />
-    <ClCompile Include="TaskRevolverExample.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
