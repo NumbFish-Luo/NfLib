@@ -1,9 +1,6 @@
 #ifndef _NFLIB_FSM_CFG_H
 #define _NFLIB_FSM_CFG_H
 
-#include <Windows.h>
-#define GET_TICK_COUNT() (u32)GetTickCount64()
-
 typedef struct Fsm            Fsm;
 typedef struct Fsm_ops        Fsm_ops;
 typedef struct FsmNode        FsmNode;

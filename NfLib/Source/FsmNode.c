@@ -1,7 +1,6 @@
+#include <NfLib/Base.h>
 #include <NfLib/FsmNode.h>
 #include <string.h>
-
-#pragma warning(disable : 4996)
 
 FsmNode_Timer* FsmNode_Timer_Init(FsmNode_Timer* this) {
     this->nowTime = this->preTime = this->runTimes = 0;

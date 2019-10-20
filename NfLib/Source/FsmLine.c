@@ -1,7 +1,6 @@
+#include <NfLib/Base.h>
 #include <NfLib/FsmLine.h>
 #include <string.h>
-
-#pragma warning(disable : 4996)
 
 FsmLine* FsmLine_Init(
     FsmLine*    this,

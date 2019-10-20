@@ -6,6 +6,12 @@
 
 #define _LAYER(layer, name) 1
 
+#if _LAYER(0, "macro") /////////////////////////////////////////////////////////
+#include <Windows.h>
+#define GET_TICK_COUNT() (u32)GetTickCount64()
+#pragma warning(disable:4996)
+#endif // _LAYER(0, "typedef")
+
 #if _LAYER(0, "typedef") ///////////////////////////////////////////////////////
 typedef bool        Bit;
 typedef char*       Str;

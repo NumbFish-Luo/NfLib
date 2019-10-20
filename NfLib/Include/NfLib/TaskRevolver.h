@@ -2,10 +2,8 @@
 #define _NFLIB_TASK_REVOLVER_H
 
 #include <NfLib/Array.h>
-#include <Windows.h>
 
 #define TASK_BULLET_NUM 6
-#define GET_TICK_COUNT() (u32)GetTickCount64()
 
 typedef struct TaskBullet       TaskBullet;
 typedef struct TaskTimer        TaskTimer;
