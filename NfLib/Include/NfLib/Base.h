@@ -44,6 +44,9 @@ typedef union {
 Bit GetBit(Byte byte, Byte i);
 void SetBit(Byte* byte, Byte i, Bit data);
 void EndianReverse(Byte byte[], size_t size);
+u8x2 ToU8x2(u16 value);
+u8x4 ToU8x4(u32 value);
+u8x8 ToU8x8(u64 value);
 #endif // _LAYER(0, "function")
 
 #endif // _NFLIB_BASE_H
