@@ -3,8 +3,8 @@
 
 #include <NfLib/Array.h>
 
-#define _Bytes(SIZE, ...) Array(u8, SIZE, ...)
-#define Bytes(SIZE, ...) _Bytes(SIZE, ...)
+#define _Bytes(SIZE, ...) Array(u8, SIZE, __VA_ARGS__)
+#define Bytes(SIZE, ...) _Bytes(SIZE, __VA_ARGS__)
 
 #define _Bytes_DEF(SIZE) Array_DEF(u8, SIZE)
 #define Bytes_DEF(SIZE) _Bytes_DEF(SIZE)
