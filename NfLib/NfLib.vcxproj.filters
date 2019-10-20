@@ -65,6 +65,12 @@
     <ClInclude Include="Example\Examples.h">
       <Filter>Example</Filter>
     </ClInclude>
+    <ClInclude Include="Include\NfLib\MyGcvt.h">
+      <Filter>Include\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\NfLib\Bytes.h">
+      <Filter>Include\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Base.c">
@@ -82,7 +88,6 @@
     <ClCompile Include="Source\TaskRevolver.c">
       <Filter>Source\TaskRevolver</Filter>
     </ClCompile>
-    <ClCompile Include="Main.c" />
     <ClCompile Include="Example\ArrayExample.c">
       <Filter>Example</Filter>
     </ClCompile>
@@ -95,5 +100,6 @@
     <ClCompile Include="Example\TaskRevolverExample.c">
       <Filter>Example</Filter>
     </ClCompile>
+    <ClCompile Include="Main.c" />
   </ItemGroup>
 </Project>

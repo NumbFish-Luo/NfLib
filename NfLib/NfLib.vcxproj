@@ -131,10 +131,12 @@
     <ClInclude Include="Example\Examples.h" />
     <ClInclude Include="Include\NfLib\Array.h" />
     <ClInclude Include="Include\NfLib\Base.h" />
+    <ClInclude Include="Include\NfLib\Bytes.h" />
     <ClInclude Include="Include\NfLib\Fsm.h" />
     <ClInclude Include="Include\NfLib\FsmCfg.h" />
     <ClInclude Include="Include\NfLib\FsmLine.h" />
     <ClInclude Include="Include\NfLib\FsmNode.h" />
+    <ClInclude Include="Include\NfLib\MyGcvt.h" />
     <ClInclude Include="Include\NfLib\One.h" />
     <ClInclude Include="Include\NfLib\R2L.h" />
     <ClInclude Include="Include\NfLib\Swap.h" />
