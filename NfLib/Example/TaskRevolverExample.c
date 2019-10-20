@@ -1,21 +1,24 @@
 #include "Examples.h"
 #include <NfLib/TaskRevolver.h>
+#include <NfLib/R2L.h>
 #include <stdio.h>
 
-void F1(TaskArgs args) { printf("F1 子弹: %d\n", args.i); }
-void F2(TaskArgs args) { printf("F2 子弹: %d\n", args.i); }
-void F3(TaskArgs args) { printf("F3 子弹: %d\n", args.i); }
+void F1(void* args) { printf("F1 子弹: %d\n", *(int*)args); }
+void F2(void* args) { printf("F2 子弹: %d\n", *(int*)args); }
+void F3(void* args) { printf("F3 子弹: %d\n", *(int*)args); }
+
+R2L_DEF(int);
+R2L_IMPL(int);
 
 void TaskRevolverExample() {
     TaskRevolver t;
-    TaskArgs a;
 
     TaskRevolver_Init(&t, 1000);
 
     // 填装三发子弹（指任务函数F + 任务函数参数a）
-    a.i = 1; t.Ops()->Loading(&t, F1, a);
-    a.i = 2; t.Ops()->Loading(&t, F2, a);
-    a.i = 3; t.Ops()->Loading(&t, F3, a);
+    t.Ops()->Loading(&t, F1, (void*)R2L(int)(1).data);
+    t.Ops()->Loading(&t, F2, (void*)R2L(int)(2).data);
+    t.Ops()->Loading(&t, F3, (void*)R2L(int)(3).data);
 
     while (1) {
         switch (t.Ops()->Shoot(&t)) {

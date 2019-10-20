@@ -4,7 +4,8 @@
 int main() {
     //BaseExample();
     //ArrayExample();
-    //FsmExample();
-    TaskRevolverExample();
+    //FsmExample_1();
+    FsmExample_2();
+    //TaskRevolverExample();
     return 0;
 }

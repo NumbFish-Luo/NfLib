@@ -6,14 +6,12 @@
 #include <NfLib/FsmNode.h>
 #include <NfLib/FsmLine.h>
 
-struct FsmEvent { const char* name; void* args; };
-
 struct Fsm {
-    FsmNode* currNode;
-    FsmNode* nodes[Fsm_MaxNodeNum];
-    u8       size;
-    void*    args;
-    Fsm_ops* ops;
+    FsmNode*   currNode;
+    FsmNode*   nodes[Fsm_MaxNodeNum];
+    u8         size;
+    void*      args;
+    Fsm_ops* (*Ops) (void);
 };
 
 struct Fsm_ops {

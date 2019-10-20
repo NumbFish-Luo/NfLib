@@ -19,7 +19,7 @@ typedef T*                          Array(T, SIZE, _Iter);                      
 struct Array(T, SIZE) {                                                         \
     T _data[SIZE];                                                              \
     u16 _size;                                                                  \
-    Array(T, SIZE, _ops)* ops;                                                  \
+    Array(T, SIZE, _ops)* (*Ops) (void);                                        \
 };                                                                              \
 /* ops */                                                                       \
 struct Array(T, SIZE, _ops) {                                                   \
@@ -129,7 +129,7 @@ static Array(T, SIZE, _ops)* Array(T, SIZE, Ops) (void) {                       
 /* Init */                                                                      \
 Array(T, SIZE)* Array(T, SIZE, _Init) (Array(T, SIZE)* this) {                  \
     this->_size = 0;                                                            \
-    this->ops = Array(T, SIZE, Ops) ();                                         \
+    this->Ops = Array(T, SIZE, Ops);                                            \
     return this;                                                                \
 }
 #define Array_IMPL(T, SIZE) _Array_IMPL(T, SIZE)

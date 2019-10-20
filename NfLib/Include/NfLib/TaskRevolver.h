@@ -5,22 +5,17 @@
 #include <Windows.h>
 
 #define TASK_BULLET_NUM 6
-#define GET_TICK_COUNT() GetTickCount64()
+#define GET_TICK_COUNT() (u32)GetTickCount64()
 
 typedef struct TaskBullet       TaskBullet;
 typedef struct TaskTimer        TaskTimer;
 typedef struct TaskRevolver     TaskRevolver;
 typedef struct TaskRevolver_ops TaskRevolver_ops;
-typedef struct TaskArgs         TaskArgs;
-typedef void (*TaskFunc) (TaskArgs args);
-
-struct TaskArgs {
-    int i;
-};
+typedef void (*TaskFunc) (void* args);
 
 struct TaskBullet {
     TaskFunc Func;
-    TaskArgs args;
+    void* args;
 };
 
 Array_DEF(TaskBullet, TASK_BULLET_NUM);
@@ -30,8 +25,8 @@ typedef Array(TaskBullet, TASK_BULLET_NUM) TaskMagazine;
 struct TaskTimer { u32 preTime, nowTime, coolDownTime; };
 
 struct TaskRevolver {
-    TaskMagazine              magazine;
-    TaskTimer                 timer;
+    TaskMagazine magazine;
+    TaskTimer    timer;
     const TaskRevolver_ops* (*Ops) (void);
 };
 
@@ -44,7 +39,7 @@ typedef enum {
 
 struct TaskRevolver_ops {
     void              (*SetCoolDownTime) (TaskRevolver* this, u32 coolDownTime);
-    bool              (*Loading        ) (TaskRevolver* this, TaskFunc Func, TaskArgs args);
+    bool              (*Loading        ) (TaskRevolver* this, TaskFunc Func, void* args);
     TaskRevolverState (*Shoot          ) (TaskRevolver* this);
 };
 

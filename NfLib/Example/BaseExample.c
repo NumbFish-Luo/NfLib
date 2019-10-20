@@ -14,7 +14,7 @@ static void PrintBytes(const u8* bytes, u8 len) {
 }
 
 #if _LAYER(0, "template") //////////////////////////////////////////////////////
-One_DEF(u8);
+R2L_DEF(u8);
 R2L_IMPL(u8);
 Swap_IMPL(u8x4);
 #endif // _LAYER(0, "template")

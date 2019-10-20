@@ -6,12 +6,12 @@ static void SetCoolDownTime(TaskRevolver* this, u32 coolDownTime) {
     this->timer.coolDownTime = coolDownTime;
 }
 
-static bool Loading(TaskRevolver* this, TaskFunc Func, TaskArgs args) {
+static bool Loading(TaskRevolver* this, TaskFunc Func, void* args) {
     TaskMagazine* magazine = &this->magazine;
     TaskBullet bullet;
     bullet.Func = Func;
     bullet.args = args;
-    return magazine->ops->PushBack(magazine, bullet);
+    return magazine->Ops()->PushBack(magazine, bullet);
     return 0;
 }
 
@@ -21,7 +21,7 @@ static TaskRevolverState Shoot(TaskRevolver* this) {
     this->timer.nowTime = GET_TICK_COUNT();
     if (this->timer.nowTime - this->timer.preTime > this->timer.coolDownTime) {
         this->timer.preTime = this->timer.nowTime;
-        if (this->magazine.ops->PopFront(&this->magazine, &bullet)) {
+        if (this->magazine.Ops()->PopFront(&this->magazine, &bullet)) {
             if (bullet.Func) {
                 bullet.Func(bullet.args);
                 return TaskRevolver_Shoot;
@@ -33,8 +33,8 @@ static TaskRevolverState Shoot(TaskRevolver* this) {
     return TaskRevolver_HoldOn;
 }
 
-static const TaskRevolver_ops* Ops() {
-    TaskRevolver_ops ops;
+static const TaskRevolver_ops* Ops(void) {
+    static TaskRevolver_ops ops;
     bool init = false;
     if (init == false) {
         init = true;

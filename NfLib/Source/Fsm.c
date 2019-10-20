@@ -51,8 +51,8 @@ static bool HandleEvent(Fsm* this, FsmEvent event) {
                 this->currNode->lines[i]->Func(this->currNode->lines[i], this->args);
             }
             this->currNode = this->currNode->lines[i]->nextNode;
-            for (j = 0; j < FsmNode_Period_MaxNum; ++j) {
-                FsmNode_Period_Init(&this->currNode->period[j]);
+            for (j = 0; j < FsmNode_Timer_MaxNum; ++j) {
+                FsmNode_Timer_Init(&this->currNode->timer[j]);
             }
             return true;
         }
@@ -60,7 +60,7 @@ static bool HandleEvent(Fsm* this, FsmEvent event) {
     return false;
 }
 
-static Fsm_ops* FsmOps(void) {
+static Fsm_ops* Ops(void) {
     static Fsm_ops ops;
     static bool init = false;
     if (init == false) {
@@ -80,6 +80,6 @@ void Fsm_Init(Fsm* this, void* args) {
     for (i = 0; i < Fsm_MaxNodeNum; ++i) { this->nodes[i] = 0; }
     this->size = 0;
     this->args = 0;
-    this->ops = FsmOps();
+    this->Ops = Ops;
     this->args = args;
 }

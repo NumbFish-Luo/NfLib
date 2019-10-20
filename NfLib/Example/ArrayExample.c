@@ -18,14 +18,14 @@ void ArrayExample() {
     Array(int, 123) a;
     int i;
 
-    printf("MaxSize = %d\n", Array(int, 123, _Init)(&a)->ops->MaxSize());
+    printf("MaxSize = %d\n", Array(int, 123, _Init)(&a)->Ops()->MaxSize());
 
-    a.ops->PushBack(&a, 111);
-    a.ops->PushBack(&a, 222);
-    a.ops->PushBack(&a, 333);
+    a.Ops()->PushBack(&a, 111);
+    a.Ops()->PushBack(&a, 222);
+    a.Ops()->PushBack(&a, 333);
     Print(a._data, a._size);
 
-    a.ops->PopBack(&a, &i);
+    a.Ops()->PopBack(&a, &i);
     Print(a._data, a._size);
     printf("%d\n", i);
 }

@@ -7,10 +7,10 @@
 #define _R2L(T) R2L$_##T##_$
 #define R2L(T) _R2L(T)
 
-#define _R2L_DEF(T) One(T) R2L(T) (T rv)
+#define _R2L_DEF(T) One_DEF(T); One(T) R2L(T) (T rv)
 #define R2L_DEF(T) _R2L_DEF(T)
 
-#define _R2L_IMPL(T) R2L_DEF(T) { One(T) tmp; tmp.data[0] = rv; return tmp; }
+#define _R2L_IMPL(T) One(T) R2L(T) (T rv) { One(T) tmp; tmp.data[0] = rv; return tmp; }
 #define R2L_IMPL(T) _R2L_IMPL(T)
 
 #endif // _NFLIB_R2L_H

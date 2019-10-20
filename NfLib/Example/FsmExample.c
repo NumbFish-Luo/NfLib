@@ -9,6 +9,8 @@
 #define CallNode_IMPL(NODE) void Call_##NODE(FsmNode* this, void* args)
 #define CallLine_IMPL(LINE) void Call_##LINE(FsmLine* this, void* args)
 
+////////////////////////////////////////////////////////////////////////////////
+
 CallNode_IMPL(n1) { printf("n1 { name = \"%s\", args = %d }\n", this->name, *(int*)args); }
 CallNode_IMPL(n2) { printf("n2 { name = \"%s\", args = %d }\n", this->name, *(int*)args); }
 CallNode_IMPL(n3) { printf("n3 { name = \"%s\", args = %d }\n", this->name, *(int*)args); }
@@ -44,40 +46,87 @@ static void Init(Fsm* f, void* args) {
 
     Fsm_Init(f, args);
 
-    f->ops->AddNode(f, FSM_NODE_INIT(n1));
-    f->ops->AddNode(f, FSM_NODE_INIT(n2));
-    f->ops->AddNode(f, FSM_NODE_INIT(n3));
+    f->Ops()->AddNode(f, FSM_NODE_INIT(n1));
+    f->Ops()->AddNode(f, FSM_NODE_INIT(n2));
+    f->Ops()->AddNode(f, FSM_NODE_INIT(n3));
 
-    f->ops->AddLine(f, FSM_LINE_INIT(la, n1, n2));
-    f->ops->AddLine(f, FSM_LINE_INIT(lb, n2, n3));
-    f->ops->AddLine(f, FSM_LINE_INIT(lc, n3, n1));
+    f->Ops()->AddLine(f, FSM_LINE_INIT(la, n1, n2));
+    f->Ops()->AddLine(f, FSM_LINE_INIT(lb, n2, n3));
+    f->Ops()->AddLine(f, FSM_LINE_INIT(lc, n3, n1));
 
-    f->ops->Start(f, "n1");
+    f->Ops()->Start(f, "n1");
 }
 
-void FsmExample() {
-    static FsmEvent e;
+void FsmExample_1() {
+    static FsmEvent e1;
     static Fsm f1, f2;
-    static int arg1 = 1;
-    static int arg2 = 2;
+    static int a1 = 1;
+    static int a2 = 2;
     static u64 preTime = 0;
     static u64 nowTime = 0;
 
-    Init(&f1, &arg1);
-    Init(&f2, &arg2);
+    Init(&f1, &a1);
+    Init(&f2, &a2);
 
     printf("start!\n");
     while (1) {
         if (GetTickCount64() - preTime > 1000) {
             nowTime = preTime = GetTickCount64();
-            SetSomeEvent(&e);
-            if (*(int*)e.args == 1) {
+            SetSomeEvent(&e1);
+            if (*(int*)e1.args == 1) {
                 printf("\n[f1]\n");
-                f1.ops->HandleEvent(&f1, e);
+                f1.Ops()->HandleEvent(&f1, e1);
             } else {
                 printf("\n[f2]\n");
-                f2.ops->HandleEvent(&f2, e);
+                f2.Ops()->HandleEvent(&f2, e1);
             }
         }
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+static FsmEvent e2;
+
+CallNode_IMPL(n4) {
+    static const FsmEvent nextEvent = { "ld", 0 };
+    printf(this->UpdateTimer(this, 0, 2000, 4, &e2, &nextEvent) ? "\n%s" : ".", this->name);
+}
+
+CallNode_IMPL(n5) {
+    static const FsmEvent nextEvent = { "le", 0 };
+    printf(this->UpdateTimer(this, 0, 500, 6, &e2, &nextEvent) ? "\n%s" : ".", this->name);
+}
+
+CallNode_IMPL(n6) {
+    static const FsmEvent nextEvent = { "lf", 0 };
+    printf(this->UpdateTimer(this, 0, 4000, 5, &e2, &nextEvent) ? "\n%s" : ".", this->name);
+}
+
+CallLine_IMPL(ld) {}
+CallLine_IMPL(le) {}
+CallLine_IMPL(lf) {}
+
+void FsmExample_2() {
+    static Fsm f3;
+    static FsmNode n4, n5, n6;
+    static FsmLine ld, le, lf;
+    e2.name = "NOTHING :-)"; e2.args = 0;
+
+    Fsm_Init(&f3, 0);
+
+    f3.Ops()->AddNode(&f3, FSM_NODE_INIT(n4));
+    f3.Ops()->AddNode(&f3, FSM_NODE_INIT(n5));
+    f3.Ops()->AddNode(&f3, FSM_NODE_INIT(n6));
+
+    f3.Ops()->AddLine(&f3, FSM_LINE_INIT(ld, n4, n5));
+    f3.Ops()->AddLine(&f3, FSM_LINE_INIT(le, n5, n6));
+    f3.Ops()->AddLine(&f3, FSM_LINE_INIT(lf, n6, n4));
+
+    f3.Ops()->Start(&f3, "n4");
+
+    while (1) {
+        f3.Ops()->HandleEvent(&f3, e2);
+        Sleep(100);
     }
 }
