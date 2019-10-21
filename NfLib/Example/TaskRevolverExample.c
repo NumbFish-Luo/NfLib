@@ -3,6 +3,11 @@
 #include <NfLib/R2L.h>
 #include <stdio.h>
 
+/*******************************************************************************
+    存在bug, 请勿使用!!
+    There are bugs, please do not use!!
+*******************************************************************************/
+
 void F1(void* args) { printf("F1 子弹: %d\n", *(int*)args); }
 void F2(void* args) { printf("F2 子弹: %d\n", *(int*)args); }
 void F3(void* args) { printf("F3 子弹: %d\n", *(int*)args); }

@@ -2,7 +2,7 @@
 #include <string.h>
 
 static inline bool At(Fsm* this, const char name[FsmName_MaxLen]) {
-    return strcmp(this->currNode->name, name);
+    return strcmp(this->currNode->name, name) == 0;
 }
 
 static bool AddNode(Fsm* this, FsmNode* node) {

@@ -19,7 +19,7 @@ FsmNode_UpdateTimerState UpdateTimer(
     *nowTime = GET_TICK_COUNT();
     if (*nowTime - *preTime > period) {
         *preTime = *nowTime;
-        if (maxRunTimes != 0 && ++(*runTimes) > maxRunTimes) {
+        if (*preTime == 0 || maxRunTimes != 0 && ++(*runTimes) > maxRunTimes) {
             return FsmNode_UpdateTimer_Timeout;
         }
         return FsmNode_UpdateTimer_TimesUp;
