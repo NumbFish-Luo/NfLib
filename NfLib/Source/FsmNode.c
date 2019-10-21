@@ -7,13 +7,11 @@ FsmNode_Timer* FsmNode_Timer_Init(FsmNode_Timer* this) {
     return this;
 }
 
-bool UpdateTimer(
-    FsmNode*        this,
-    u8              timerId,
-    u32             period,
-    u32             maxRunTimes,
-    FsmEvent*       event,
-    const FsmEvent* nextEvent)
+FsmNode_UpdateTimerState UpdateTimer(
+    FsmNode* this,
+    u8       timerId,
+    u32      period,
+    u32      maxRunTimes)
 {
     u32* nowTime  = &this->timer->nowTime ;
     u32* preTime  = &this->timer->preTime ;
@@ -22,12 +20,11 @@ bool UpdateTimer(
     if (*nowTime - *preTime > period) {
         *preTime = *nowTime;
         if (maxRunTimes != 0 && ++(*runTimes) > maxRunTimes) {
-            *event = *nextEvent;
-            return false;
+            return FsmNode_UpdateTimer_Timeout;
         }
-        return true;
+        return FsmNode_UpdateTimer_TimesUp;
     }
-    return false;
+    return FsmNode_UpdateTimer_Wait;
 }
 
 FsmNode* FsmNode_Init(

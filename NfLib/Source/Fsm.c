@@ -36,14 +36,16 @@ static bool Start(Fsm* this, const char name[FsmName_MaxLen]) {
     return false;
 }
 
+static bool Run(Fsm* this) {
+    if (this->currNode == 0 || this->currNode->Func == 0) { return false; }
+    this->currNode->Func(this->currNode, this->args);
+    return true;
+}
+
 static bool HandleEvent(Fsm* this, FsmEvent event) {
     u8 i = 0;
     u8 j = 0;
     const char* name = event.name;
-    if (this->currNode == 0 || this->currNode->Func == 0) {
-        return false;
-    }
-    this->currNode->Func(this->currNode, this->args);
     if (strcmp(name, FsmNone) == 0) { return false; }
     for (i = 0; i < this->currNode->lineSize; ++i) {
         if (this->currNode->lines[i] != 0 && strcmp(this->currNode->lines[i]->name, name) == 0) {
@@ -70,6 +72,7 @@ static Fsm_ops* Ops(void) {
         ops.AddLine     = AddLine;
         ops.Start       = Start;
         ops.HandleEvent = HandleEvent;
+        ops.Run         = Run;
     }
     return &ops;
 }

@@ -65,10 +65,10 @@
     <ClInclude Include="Example\Examples.h">
       <Filter>Example</Filter>
     </ClInclude>
-    <ClInclude Include="Include\NfLib\MyGcvt.h">
+    <ClInclude Include="Include\NfLib\Bytes.h">
       <Filter>Include\Base</Filter>
     </ClInclude>
-    <ClInclude Include="Include\NfLib\Bytes.h">
+    <ClInclude Include="Include\NfLib\Func.h">
       <Filter>Include\Base</Filter>
     </ClInclude>
   </ItemGroup>
@@ -101,5 +101,11 @@
       <Filter>Example</Filter>
     </ClCompile>
     <ClCompile Include="Main.c" />
+    <ClCompile Include="Source\Func.c">
+      <Filter>Source\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Example\FuncExample.c">
+      <Filter>Example</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

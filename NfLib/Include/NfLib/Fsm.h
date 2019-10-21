@@ -20,6 +20,7 @@ struct Fsm_ops {
     bool (*AddLine    ) (Fsm* this, FsmLine* line);
     bool (*Start      ) (Fsm* this, const char name[FsmName_MaxLen]);
     bool (*HandleEvent) (Fsm* this, FsmEvent event);
+    bool (*Run        ) (Fsm* this);
 };
 
 void Fsm_Init(Fsm* this, void* args);

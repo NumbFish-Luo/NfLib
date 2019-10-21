@@ -4,6 +4,12 @@
 #include <NfLib/Base.h>
 #include <NfLib/FsmCfg.h>
 
+typedef enum {
+    FsmNode_UpdateTimer_Wait,
+    FsmNode_UpdateTimer_TimesUp,
+    FsmNode_UpdateTimer_Timeout
+} FsmNode_UpdateTimerState;
+
 struct FsmEvent { const char* name; void* args; };
 
 struct FsmNode_Timer { u32 preTime, nowTime, runTimes; };
@@ -15,13 +21,11 @@ struct FsmNode {
     u8            lineSize;
     FsmNodeCall   Func;
     FsmNode_Timer timer[FsmNode_Timer_MaxNum];
-    bool (*UpdateTimer) (
-        FsmNode*        this,
-        u8              timerId,
-        u32             period,
-        u32             maxRunTimes,
-        FsmEvent*       event,
-        const FsmEvent* nextEvent
+    FsmNode_UpdateTimerState (*UpdateTimer) (
+        FsmNode* this,
+        u8       timerId,
+        u32      period,
+        u32      maxRunTimes
     );
 };
 

@@ -75,9 +75,11 @@ void FsmExample_1() {
             SetSomeEvent(&e1);
             if (*(int*)e1.args == 1) {
                 printf("\n[f1]\n");
+                f1.Ops()->Run(&f1);
                 f1.Ops()->HandleEvent(&f1, e1);
             } else {
                 printf("\n[f2]\n");
+                f2.Ops()->Run(&f2);
                 f2.Ops()->HandleEvent(&f2, e1);
             }
         }
@@ -89,18 +91,27 @@ void FsmExample_1() {
 static FsmEvent e2;
 
 CallNode_IMPL(n4) {
-    static const FsmEvent nextEvent = { "ld", 0 };
-    printf(this->UpdateTimer(this, 0, 2000, 4, &e2, &nextEvent) ? "\n%s" : ".", this->name);
+    switch (this->UpdateTimer(this, 0, 2000, 4)) {
+    case FsmNode_UpdateTimer_Wait: printf("."); break;
+    case FsmNode_UpdateTimer_TimesUp: printf("\n%s", this->name); break;
+    case FsmNode_UpdateTimer_Timeout: printf("\nTimeout!\n"); e2.name = "ld"; break;
+    }
 }
 
 CallNode_IMPL(n5) {
-    static const FsmEvent nextEvent = { "le", 0 };
-    printf(this->UpdateTimer(this, 0, 500, 6, &e2, &nextEvent) ? "\n%s" : ".", this->name);
+    switch (this->UpdateTimer(this, 0, 500, 6)) {
+    case FsmNode_UpdateTimer_Wait: printf("."); break;
+    case FsmNode_UpdateTimer_TimesUp: printf("\n%s", this->name); break;
+    case FsmNode_UpdateTimer_Timeout: printf("\nTimeout!\n"); e2.name = "le"; break;
+    }
 }
 
 CallNode_IMPL(n6) {
-    static const FsmEvent nextEvent = { "lf", 0 };
-    printf(this->UpdateTimer(this, 0, 4000, 5, &e2, &nextEvent) ? "\n%s" : ".", this->name);
+    switch (this->UpdateTimer(this, 0, 4000, 5)) {
+    case FsmNode_UpdateTimer_Wait: printf("."); break;
+    case FsmNode_UpdateTimer_TimesUp: printf("\n%s", this->name); break;
+    case FsmNode_UpdateTimer_Timeout: printf("\nTimeout!\n"); e2.name = "lf"; break;
+    }
 }
 
 CallLine_IMPL(ld) {}
@@ -126,6 +137,7 @@ void FsmExample_2() {
     f3.Ops()->Start(&f3, "n4");
 
     while (1) {
+        f3.Ops()->Run(&f3);
         f3.Ops()->HandleEvent(&f3, e2);
         Sleep(100);
     }
