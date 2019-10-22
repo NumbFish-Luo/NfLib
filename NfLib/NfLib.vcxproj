@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -140,21 +140,21 @@
     <ClInclude Include="Include\NfLib\One.h" />
     <ClInclude Include="Include\NfLib\R2L.h" />
     <ClInclude Include="Include\NfLib\Swap.h" />
-    <ClInclude Include="Include\NfLib\TaskRevolver.h" />
+    <ClInclude Include="Include\NfLib\TaskBullet.h" />
+    <ClInclude Include="Include\NfLib\TaskGun.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Example\ArrayExample.c" />
     <ClCompile Include="Example\BaseExample.c" />
     <ClCompile Include="Example\FsmExample.c" />
     <ClCompile Include="Example\FuncExample.c" />
-    <ClCompile Include="Example\TaskRevolverExample.c" />
+    <ClCompile Include="Example\TaskGunExample.c" />
     <ClCompile Include="Main.c" />
     <ClCompile Include="Source\Base.c" />
     <ClCompile Include="Source\Fsm.c" />
     <ClCompile Include="Source\FsmLine.c" />
     <ClCompile Include="Source\FsmNode.c" />
     <ClCompile Include="Source\Func.c" />
-    <ClCompile Include="Source\TaskRevolver.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

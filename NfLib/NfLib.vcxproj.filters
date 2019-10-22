@@ -24,11 +24,8 @@
     <Filter Include="Source\Fsm">
       <UniqueIdentifier>{59dd2685-7958-4609-a39c-42df3defb9c9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Include\TaskRevolver">
+    <Filter Include="Include\TaskGun">
       <UniqueIdentifier>{f2e68e8e-5b87-49ab-8675-5920b0125e89}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\TaskRevolver">
-      <UniqueIdentifier>{6dccd391-8fa1-4f8f-ab38-42337c79828c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -59,9 +56,6 @@
     <ClInclude Include="Include\NfLib\FsmNode.h">
       <Filter>Include\Fsm</Filter>
     </ClInclude>
-    <ClInclude Include="Include\NfLib\TaskRevolver.h">
-      <Filter>Include\TaskRevolver</Filter>
-    </ClInclude>
     <ClInclude Include="Example\Examples.h">
       <Filter>Example</Filter>
     </ClInclude>
@@ -70,6 +64,12 @@
     </ClInclude>
     <ClInclude Include="Include\NfLib\Func.h">
       <Filter>Include\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\NfLib\TaskGun.h">
+      <Filter>Include\TaskGun</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\NfLib\TaskBullet.h">
+      <Filter>Include\TaskGun</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -85,9 +85,6 @@
     <ClCompile Include="Source\FsmNode.c">
       <Filter>Source\Fsm</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TaskRevolver.c">
-      <Filter>Source\TaskRevolver</Filter>
-    </ClCompile>
     <ClCompile Include="Example\ArrayExample.c">
       <Filter>Example</Filter>
     </ClCompile>
@@ -97,14 +94,14 @@
     <ClCompile Include="Example\FsmExample.c">
       <Filter>Example</Filter>
     </ClCompile>
-    <ClCompile Include="Example\TaskRevolverExample.c">
-      <Filter>Example</Filter>
-    </ClCompile>
     <ClCompile Include="Main.c" />
     <ClCompile Include="Source\Func.c">
       <Filter>Source\Base</Filter>
     </ClCompile>
     <ClCompile Include="Example\FuncExample.c">
+      <Filter>Example</Filter>
+    </ClCompile>
+    <ClCompile Include="Example\TaskGunExample.c">
       <Filter>Example</Filter>
     </ClCompile>
   </ItemGroup>

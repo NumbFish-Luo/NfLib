@@ -5,8 +5,8 @@ int main() {
     //BaseExample();
     //ArrayExample();
     //FsmExample_1();
-    FsmExample_2();
-    //TaskRevolverExample();
+    //FsmExample_2();
     //FuncExample();
+    TaskGunExample();
     return 0;
 }

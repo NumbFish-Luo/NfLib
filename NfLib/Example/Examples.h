@@ -5,7 +5,7 @@ void BaseExample(void);
 void ArrayExample(void);
 void FsmExample_1(void);
 void FsmExample_2(void);
-void TaskRevolverExample(void);
 void FuncExample(void);
+void TaskGunExample(void);
 
 #endif // _NFLIB_BASE_EXAMPLE_H

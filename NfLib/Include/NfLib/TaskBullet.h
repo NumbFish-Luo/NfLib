@@ -1,0 +1,4 @@
+#ifndef _NFLIB_TASK_BULLET_H
+#define _NFLIB_TASK_BULLET_H
+
+#endif // _NFLIB_TASK_BULLET_H
