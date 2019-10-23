@@ -3,14 +3,6 @@
 #include <stdio.h>
 #include <Windows.h>
 
-#define FSM_NODE_INIT(NODE) FsmNode_Init(&NODE, #NODE, Call_##NODE)
-#define FSM_LINE_INIT(LINE, PREV_NODE, NEXT_NODE) FsmLine_Init(&LINE, &PREV_NODE, &NEXT_NODE, #LINE, Call_##LINE)
-
-#define CallNode_IMPL(NODE) void Call_##NODE(FsmNode* this, FsmArgType arg)
-#define CallLine_IMPL(LINE) void Call_##LINE(FsmLine* this, FsmArgType arg)
-
-////////////////////////////////////////////////////////////////////////////////
-
 CallNode_IMPL(n1) { printf("n1 { name = \"%s\", arg = %d }\n", this->name, arg); }
 CallNode_IMPL(n2) { printf("n2 { name = \"%s\", arg = %d }\n", this->name, arg); }
 CallNode_IMPL(n3) { printf("n3 { name = \"%s\", arg = %d }\n", this->name, arg); }
