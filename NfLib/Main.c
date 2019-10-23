@@ -4,9 +4,9 @@
 int main() {
     //BaseExample();
     //ArrayExample();
-    //FsmExample_1();
+    FsmExample_1();
     //FsmExample_2();
     //FuncExample();
-    TaskGunExample();
+    //TaskGunExample();
     return 0;
 }

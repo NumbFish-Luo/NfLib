@@ -10,7 +10,7 @@ struct Fsm {
     FsmNode*   currNode;
     FsmNode*   nodes[Fsm_MaxNodeNum];
     u8         size;
-    void*      args;
+    FsmArgType arg;
     Fsm_ops* (*Ops) (void);
 };
 
@@ -23,6 +23,6 @@ struct Fsm_ops {
     bool (*Run        ) (Fsm* this);
 };
 
-void Fsm_Init(Fsm* this, void* args);
+void Fsm_Init(Fsm* this, FsmArgType arg);
 
 #endif // _NFLIB_FSM_H

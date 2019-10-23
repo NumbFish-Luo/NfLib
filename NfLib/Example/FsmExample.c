@@ -6,45 +6,43 @@
 #define FSM_NODE_INIT(NODE) FsmNode_Init(&NODE, #NODE, Call_##NODE)
 #define FSM_LINE_INIT(LINE, PREV_NODE, NEXT_NODE) FsmLine_Init(&LINE, &PREV_NODE, &NEXT_NODE, #LINE, Call_##LINE)
 
-#define CallNode_IMPL(NODE) void Call_##NODE(FsmNode* this, void* args)
-#define CallLine_IMPL(LINE) void Call_##LINE(FsmLine* this, void* args)
+#define CallNode_IMPL(NODE) void Call_##NODE(FsmNode* this, FsmArgType arg)
+#define CallLine_IMPL(LINE) void Call_##LINE(FsmLine* this, FsmArgType arg)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-CallNode_IMPL(n1) { printf("n1 { name = \"%s\", args = %d }\n", this->name, *(int*)args); }
-CallNode_IMPL(n2) { printf("n2 { name = \"%s\", args = %d }\n", this->name, *(int*)args); }
-CallNode_IMPL(n3) { printf("n3 { name = \"%s\", args = %d }\n", this->name, *(int*)args); }
+CallNode_IMPL(n1) { printf("n1 { name = \"%s\", arg = %d }\n", this->name, arg); }
+CallNode_IMPL(n2) { printf("n2 { name = \"%s\", arg = %d }\n", this->name, arg); }
+CallNode_IMPL(n3) { printf("n3 { name = \"%s\", arg = %d }\n", this->name, arg); }
 
-CallLine_IMPL(la) { printf("la { name = \"%s\", args = %d }\n", this->name, *(int*)args); }
-CallLine_IMPL(lb) { printf("lb { name = \"%s\", args = %d }\n", this->name, *(int*)args); }
-CallLine_IMPL(lc) { printf("lc { name = \"%s\", args = %d }\n", this->name, *(int*)args); }
+CallLine_IMPL(la) { printf("la { name = \"%s\", arg = %d }\n", this->name, arg); }
+CallLine_IMPL(lb) { printf("lb { name = \"%s\", arg = %d }\n", this->name, arg); }
+CallLine_IMPL(lc) { printf("lc { name = \"%s\", arg = %d }\n", this->name, arg); }
 
 static void SetSomeEvent(FsmEvent* event) {
-    static bool init = false;
-    static const char* name[3] = { "la", "lb", "lc" };
-    static int arg[2] = { 1, 2 };
     static FsmEvent eventList[6];
     static u8 i = 0;
+    static bool init = false;
     if (init == false) {
         init = true;
 
-        eventList[0].name = name[0]; eventList[0].args = &arg[0];
-        eventList[1].name = name[1]; eventList[1].args = &arg[0];
-        eventList[2].name = name[2]; eventList[2].args = &arg[0];
+        eventList[0].name = "la"; eventList[0].arg = 1;
+        eventList[1].name = "lb"; eventList[1].arg = 1;
+        eventList[2].name = "lc"; eventList[2].arg = 1;
 
-        eventList[3].name = name[0]; eventList[3].args = &arg[1];
-        eventList[4].name = name[1]; eventList[4].args = &arg[1];
-        eventList[5].name = name[2]; eventList[5].args = &arg[1];
+        eventList[3].name = "la"; eventList[3].arg = 2;
+        eventList[4].name = "lb"; eventList[4].arg = 2;
+        eventList[5].name = "lc"; eventList[5].arg = 2;
     }
     *event = eventList[i++];
     i %= 6;
 }
 
-static void Init(Fsm* f, void* args) {
+static void Init(Fsm* f, FsmArgType arg) {
     static FsmNode n1, n2, n3;
     static FsmLine la, lb, lc;
 
-    Fsm_Init(f, args);
+    Fsm_Init(f, arg);
 
     f->Ops()->AddNode(f, FSM_NODE_INIT(n1));
     f->Ops()->AddNode(f, FSM_NODE_INIT(n2));
@@ -60,20 +58,18 @@ static void Init(Fsm* f, void* args) {
 void FsmExample_1() {
     static FsmEvent e1;
     static Fsm f1, f2;
-    static int a1 = 1;
-    static int a2 = 2;
     static u64 preTime = 0;
     static u64 nowTime = 0;
 
-    Init(&f1, &a1);
-    Init(&f2, &a2);
+    Init(&f1, 1);
+    Init(&f2, 2);
 
     printf("start!\n");
     while (1) {
         if (GetTickCount64() - preTime > 1000) {
             nowTime = preTime = GetTickCount64();
             SetSomeEvent(&e1);
-            if (*(int*)e1.args == 1) {
+            if (e1.arg == 1) {
                 printf("\n[f1]\n");
                 f1.Ops()->Run(&f1);
                 f1.Ops()->HandleEvent(&f1, e1);
@@ -122,7 +118,7 @@ void FsmExample_2() {
     static Fsm f3;
     static FsmNode n4, n5, n6;
     static FsmLine ld, le, lf;
-    e2.name = "NOTHING :-)"; e2.args = 0;
+    e2.name = "NOTHING :-)"; e2.arg = 0;
 
     Fsm_Init(&f3, 0);
 

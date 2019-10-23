@@ -10,7 +10,7 @@ typedef enum {
     FsmNode_UpdateTimer_Timeout
 } FsmNode_UpdateTimerState;
 
-struct FsmEvent { const char* name; void* args; };
+struct FsmEvent { const char* name; FsmArgType arg; };
 
 struct FsmNode_Timer { u32 preTime, nowTime, runTimes; };
 FsmNode_Timer* FsmNode_Timer_Init(FsmNode_Timer* this);
