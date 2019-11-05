@@ -24,6 +24,7 @@ struct Array(T, SIZE) {                                                         
 /* ops */                                                                       \
 struct Array(T, SIZE, _ops) {                                                   \
     u16                   (*MaxSize   ) (void);                                 \
+    u16                   (*Size      ) (Array(T, SIZE)* this);                 \
     bool                  (*PushBacks ) (Array(T, SIZE)* this, const T data[], u16 count); \
     bool                  (*PushFronts) (Array(T, SIZE)* this, const T data[], u16 count); \
     bool                  (*PushBack  ) (Array(T, SIZE)* this, T data);         \
@@ -33,6 +34,8 @@ struct Array(T, SIZE, _ops) {                                                   
     bool                  (*PopBack   ) (Array(T, SIZE)* this, T* data);        \
     bool                  (*PopFront  ) (Array(T, SIZE)* this, T* data);        \
     void                  (*SetData   ) (Array(T, SIZE)* this, const T data[SIZE]); \
+    bool                  (*Set       ) (Array(T, SIZE)* this, u16 i, T data);  \
+    bool                  (*Get       ) (Array(T, SIZE)* this, u16 i, T** data); \
     Array(T, SIZE, _Iter) (*Begin     ) (Array(T, SIZE)* this);                 \
     Array(T, SIZE, _Iter) (*End       ) (Array(T, SIZE)* this);                 \
 };                                                                              \
@@ -44,9 +47,8 @@ Array(T, SIZE)* Array(T, SIZE, _Init) (Array(T, SIZE)* this)
 #if _LAYER(0, "impl") //////////////////////////////////////////////////////////
 #define _Array_IMPL(T, SIZE)                                                    \
 /* static function */                                                           \
-static inline u16 Array(T, SIZE, _MaxSize) (void) {                             \
-    return SIZE;                                                                \
-}                                                                               \
+static inline u16 Array(T, SIZE, _MaxSize) (void) { return SIZE; }              \
+static inline u16 Array(T, SIZE, _Size) (Array(T, SIZE)* this) { return this->_size; } \
 static inline bool Array(T, SIZE, _PushBacks) (Array(T, SIZE)* this, const T data[], u16 count) { \
     u16 i = 0;                                                                  \
     if (this->_size + count > SIZE) { return false; }                           \
@@ -59,16 +61,14 @@ static inline bool Array(T, SIZE, _PushFronts) (Array(T, SIZE)* this, const T da
     for (i = 0; i < this->_size; ++i) {                                         \
         this->_data[this->_size - i + count - 1] = this->_data[this->_size - i - 1]; \
     }                                                                           \
-    for (i = 0; i < count; ++i) {                                               \
-        this->_data[i] = data[i];                                               \
-    }                                                                           \
+    for (i = 0; i < count; ++i) { this->_data[i] = data[i]; }                   \
     this->_size += count;                                                       \
     return true;                                                                \
 }                                                                               \
-static bool Array(T, SIZE, _PushBack) (Array(T, SIZE)* this, T data) {          \
+static inline bool Array(T, SIZE, _PushBack) (Array(T, SIZE)* this, T data) {   \
     return Array(T, SIZE, _PushBacks) (this, &data, 1);                         \
 }                                                                               \
-static bool Array(T, SIZE, _PushFront) (Array(T, SIZE)* this, T data) {         \
+static inline bool Array(T, SIZE, _PushFront) (Array(T, SIZE)* this, T data) {  \
     return Array(T, SIZE, _PushFronts) (this, &data, 1);                        \
 }                                                                               \
 static inline bool Array(T, SIZE, _PopBacks) (Array(T, SIZE)* this, T data[], u16 count) { \
@@ -80,19 +80,17 @@ static inline bool Array(T, SIZE, _PopBacks) (Array(T, SIZE)* this, T data[], u1
 static inline bool Array(T, SIZE, _PopFronts) (Array(T, SIZE)* this, T data[], u16 count) { \
     u16 i = 0;                                                                  \
     if (this->_size < count) { return false; }                                  \
-    for (i = 0; i < count; ++i) {                                               \
-        data[i] = this->_data[i];                                               \
-    }                                                                           \
+    for (i = 0; i < count; ++i) { data[i] = this->_data[i]; }                   \
     for (i = 0; i < this->_size; ++i) {                                         \
         this->_data[i] = this->_data[i + count];                                \
     }                                                                           \
     this->_size -= count;                                                       \
     return true;                                                                \
 }                                                                               \
-static bool Array(T, SIZE, _PopBack) (Array(T, SIZE)* this, T* data) {          \
+static inline bool Array(T, SIZE, _PopBack) (Array(T, SIZE)* this, T* data) {   \
     return Array(T, SIZE, _PopBacks) (this, data, 1);                           \
 }                                                                               \
-static bool Array(T, SIZE, _PopFront) (Array(T, SIZE)* this, T* data) {         \
+static inline bool Array(T, SIZE, _PopFront) (Array(T, SIZE)* this, T* data) {  \
     return Array(T, SIZE, _PopFronts) (this, data, 1);                          \
 }                                                                               \
 static inline void Array(T, SIZE, _SetData) (Array(T, SIZE)* this, const T data[SIZE]) { \
@@ -100,13 +98,23 @@ static inline void Array(T, SIZE, _SetData) (Array(T, SIZE)* this, const T data[
     for (i = 0; i < SIZE; ++i) { this->_data[i] = data[i]; }                    \
     this->_size = SIZE;                                                         \
 }                                                                               \
+static inline bool Array(T, SIZE, _Set) (Array(T, SIZE)* this, u16 i, T data) { \
+    if (i >= this->_size) { return false; }                                     \
+    this->_data[i] = data;                                                      \
+    return true;                                                                \
+}                                                                               \
+static inline bool Array(T, SIZE, _Get) (Array(T, SIZE)* this, u16 i, T** data) { \
+    if (i >= this->_size) { return false; }                                     \
+    *data = &this->_data[i];                                                    \
+    return true;                                                                \
+}                                                                               \
 static inline Array(T, SIZE, _Iter) Array(T, SIZE, _Begin) (Array(T, SIZE)* this) { \
     return &this->_data[0];                                                     \
 }                                                                               \
 static inline Array(T, SIZE, _Iter) Array(T, SIZE, _End) (Array(T, SIZE)* this) { \
     return &this->_data[this->_size];                                           \
 }                                                                               \
-static Array(T, SIZE, _ops)* Array(T, SIZE, Ops) (void) {                       \
+static inline Array(T, SIZE, _ops)* Array(T, SIZE, Ops) (void) {                \
     static Array(T, SIZE, _ops) ops;                                            \
     static bool init = false;                                                   \
     if (init == false) {                                                        \
@@ -121,13 +129,15 @@ static Array(T, SIZE, _ops)* Array(T, SIZE, Ops) (void) {                       
         ops.PopBack    = Array(T, SIZE, _PopBack   );                           \
         ops.PopFront   = Array(T, SIZE, _PopFront  );                           \
         ops.SetData    = Array(T, SIZE, _SetData   );                           \
+        ops.Set        = Array(T, SIZE, _Set       );                           \
+        ops.Get        = Array(T, SIZE, _Get       );                           \
         ops.Begin      = Array(T, SIZE, _Begin     );                           \
         ops.End        = Array(T, SIZE, _End       );                           \
     }                                                                           \
     return &ops;                                                                \
 }                                                                               \
 /* Init */                                                                      \
-Array(T, SIZE)* Array(T, SIZE, _Init) (Array(T, SIZE)* this) {                  \
+inline Array(T, SIZE)* Array(T, SIZE, _Init) (Array(T, SIZE)* this) {           \
     this->_size = 0;                                                            \
     this->Ops = Array(T, SIZE, Ops);                                            \
     return this;                                                                \

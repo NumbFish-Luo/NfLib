@@ -137,10 +137,10 @@
     <ClInclude Include="Include\NfLib\FsmLine.h" />
     <ClInclude Include="Include\NfLib\FsmNode.h" />
     <ClInclude Include="Include\NfLib\Func.h" />
+    <ClInclude Include="Include\NfLib\Log.h" />
     <ClInclude Include="Include\NfLib\One.h" />
     <ClInclude Include="Include\NfLib\R2L.h" />
     <ClInclude Include="Include\NfLib\Swap.h" />
-    <ClInclude Include="Include\NfLib\TaskBullet.h" />
     <ClInclude Include="Include\NfLib\TaskGun.h" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +148,7 @@
     <ClCompile Include="Example\BaseExample.c" />
     <ClCompile Include="Example\FsmExample.c" />
     <ClCompile Include="Example\FuncExample.c" />
+    <ClCompile Include="Example\LogExample.c" />
     <ClCompile Include="Example\TaskGunExample.c" />
     <ClCompile Include="Main.c" />
     <ClCompile Include="Source\Base.c" />
@@ -155,6 +156,7 @@
     <ClCompile Include="Source\FsmLine.c" />
     <ClCompile Include="Source\FsmNode.c" />
     <ClCompile Include="Source\Func.c" />
+    <ClCompile Include="Source\Log.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

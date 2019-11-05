@@ -68,8 +68,8 @@
     <ClInclude Include="Include\NfLib\TaskGun.h">
       <Filter>Include\TaskGun</Filter>
     </ClInclude>
-    <ClInclude Include="Include\NfLib\TaskBullet.h">
-      <Filter>Include\TaskGun</Filter>
+    <ClInclude Include="Include\NfLib\Log.h">
+      <Filter>Include\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +103,12 @@
     </ClCompile>
     <ClCompile Include="Example\TaskGunExample.c">
       <Filter>Example</Filter>
+    </ClCompile>
+    <ClCompile Include="Example\LogExample.c">
+      <Filter>Example</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Log.c">
+      <Filter>Source\Base</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -11,20 +11,19 @@
 #define __WINDOWS_10__ 1
 #define __LPC177X_8X__ 0
 
-#if __WINDOWS_10__
-
+#if __WINDOWS_10__ /////////////////////////////////////////////////////////////
+#include <stdio.h>
 #include <Windows.h>
 #define GET_TICK_COUNT() (u32)GetTickCount64()
 #pragma warning(disable:4996)
-
-#elif __LPC177X_8X__
-
+#elif __LPC177X_8X__ ///////////////////////////////////////////////////////////
 #include "base/time.h"
 #define GET_TICK_COUNT() get_tick()
-
-#endif
-
+#endif // __WINDOWS_10__
 #endif // _LAYER(0, "typedef")
+
+static const char* g_assertName = "none";
+inline Assert(bool isTrue, const char* name) { if (!isTrue) { g_assertName = name; while (1); } }
 
 #if _LAYER(0, "typedef") ///////////////////////////////////////////////////////
 typedef bool        Bit;
