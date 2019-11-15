@@ -13,10 +13,11 @@ struct _Log {
     u8    _lineLen;
     u8    _lineSize;
     bool  clear;
-    void  (*Clear) (void);
+    bool  alwayClear;
+    void  (*Clear      ) (void);
     void  (*HandleClear) (void);
-    _Log* (*EndLine) (void);
-    _Log* (*Add) (const char* format, ...);
+    _Log* (*EndLine    ) (void);
+    _Log* (*Add        ) (const char* format, ...);
 };
 
 extern _Log _g_log;

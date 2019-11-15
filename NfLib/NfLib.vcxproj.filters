@@ -35,12 +35,6 @@
     <ClInclude Include="Include\NfLib\Base.h">
       <Filter>Include\Base</Filter>
     </ClInclude>
-    <ClInclude Include="Include\NfLib\One.h">
-      <Filter>Include\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\NfLib\R2L.h">
-      <Filter>Include\Base</Filter>
-    </ClInclude>
     <ClInclude Include="Include\NfLib\Swap.h">
       <Filter>Include\Base</Filter>
     </ClInclude>
@@ -60,9 +54,6 @@
       <Filter>Example</Filter>
     </ClInclude>
     <ClInclude Include="Include\NfLib\Bytes.h">
-      <Filter>Include\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\NfLib\Func.h">
       <Filter>Include\Base</Filter>
     </ClInclude>
     <ClInclude Include="Include\NfLib\TaskGun.h">
@@ -95,12 +86,6 @@
       <Filter>Example</Filter>
     </ClCompile>
     <ClCompile Include="Main.c" />
-    <ClCompile Include="Source\Func.c">
-      <Filter>Source\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="Example\FuncExample.c">
-      <Filter>Example</Filter>
-    </ClCompile>
     <ClCompile Include="Example\TaskGunExample.c">
       <Filter>Example</Filter>
     </ClCompile>

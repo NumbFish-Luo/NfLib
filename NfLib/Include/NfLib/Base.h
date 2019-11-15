@@ -71,10 +71,8 @@ typedef union {
 Bit GetBit(Byte byte, Byte i);
 void SetBit(Byte* byte, Byte i, Bit data);
 void EndianReverse(Byte byte[], size_t size);
-u8x1 ToU8x1(u8  value);
-u8x2 ToU8x2(u16 value);
-u8x4 ToU8x4(u32 value);
-u8x8 ToU8x8(u64 value);
+u8 ASC2BCD(u8* bcd, const u8* asc, u32 len); // ASCII to BCD
+
 #endif // _LAYER(0, "function")
 
 #endif // _NFLIB_BASE_H

@@ -5,7 +5,6 @@ void BaseExample(void);
 void ArrayExample(void);
 void FsmExample_1(void);
 void FsmExample_2(void);
-void FuncExample(void);
 void TaskGunExample(void);
 void LogExample(void);
 

@@ -1,7 +1,6 @@
 #include "Examples.h"
 
 #include <NfLib/Base.h>
-#include <NfLib/R2L.h>
 #include <NfLib/Swap.h>
 #include <stdio.h>
 
@@ -14,8 +13,6 @@ static void PrintBytes(const u8* bytes, u8 len) {
 }
 
 #if _LAYER(0, "template") //////////////////////////////////////////////////////
-R2L_DEF(u8);
-R2L_IMPL(u8);
 Swap_IMPL(u8x4);
 #endif // _LAYER(0, "template")
 
@@ -35,9 +32,4 @@ void BaseExample(void) {
     Swap(u8x4)(&a, &b);
     printf("a.dWord[0] = 0x%X, b.dWord[0] = 0x%X\n", a.dWord[0], b.dWord[0]);
 #endif // _LAYER(0, "swap")
-
-#if _LAYER(0, "right value to left value") /////////////////////////////////////
-    // PrintBytes(0xAB, 1); // ERROR! :-(
-    PrintBytes(R2L(u8)(0xAB).data, 1); // It's OK! :-)
-#endif // _LAYER(0, "right value to left value")
 }
