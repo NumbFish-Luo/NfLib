@@ -8,6 +8,8 @@ int main() {
     //FsmExample_2();
     //FuncExample();
     //TaskGunExample();
-    LogExample();
+    //LogExample();
+    //PolymorphismExample();
+    QuickSortExample();
     return 0;
 }

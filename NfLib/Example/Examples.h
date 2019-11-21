@@ -7,5 +7,7 @@ void FsmExample_1(void);
 void FsmExample_2(void);
 void TaskGunExample(void);
 void LogExample(void);
+void PolymorphismExample(void);
+void QuickSortExample(void);
 
 #endif // _NFLIB_BASE_EXAMPLE_H

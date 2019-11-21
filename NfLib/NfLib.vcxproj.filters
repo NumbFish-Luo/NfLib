@@ -27,6 +27,18 @@
     <Filter Include="Include\TaskGun">
       <UniqueIdentifier>{f2e68e8e-5b87-49ab-8675-5920b0125e89}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include\RBTree">
+      <UniqueIdentifier>{928f5a1b-0594-4890-93f7-6c2fc29e374a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\RBTree">
+      <UniqueIdentifier>{9b2cdf0c-247c-41e1-b285-93b4a52cd8ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Sort">
+      <UniqueIdentifier>{e9901b49-55df-4507-8bd2-4880652ef823}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\Sort">
+      <UniqueIdentifier>{a781ccc3-8411-4078-9d7a-54f489b09362}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\NfLib\Array.h">
@@ -62,6 +74,12 @@
     <ClInclude Include="Include\NfLib\Log.h">
       <Filter>Include\Base</Filter>
     </ClInclude>
+    <ClInclude Include="Include\NfLib\Queue.h">
+      <Filter>Include\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\NfLib\QuickSort.h">
+      <Filter>Include\Sort</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Base.c">
@@ -94,6 +112,13 @@
     </ClCompile>
     <ClCompile Include="Source\Log.c">
       <Filter>Source\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Example\PolymorphismExample.c">
+      <Filter>Example</Filter>
+    </ClCompile>
+    <ClCompile Include="TEST.C" />
+    <ClCompile Include="Example\QuickSortExample.c">
+      <Filter>Example</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

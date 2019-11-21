@@ -137,6 +137,8 @@
     <ClInclude Include="Include\NfLib\FsmLine.h" />
     <ClInclude Include="Include\NfLib\FsmNode.h" />
     <ClInclude Include="Include\NfLib\Log.h" />
+    <ClInclude Include="Include\NfLib\Queue.h" />
+    <ClInclude Include="Include\NfLib\QuickSort.h" />
     <ClInclude Include="Include\NfLib\Swap.h" />
     <ClInclude Include="Include\NfLib\TaskGun.h" />
   </ItemGroup>
@@ -145,6 +147,8 @@
     <ClCompile Include="Example\BaseExample.c" />
     <ClCompile Include="Example\FsmExample.c" />
     <ClCompile Include="Example\LogExample.c" />
+    <ClCompile Include="Example\PolymorphismExample.c" />
+    <ClCompile Include="Example\QuickSortExample.c" />
     <ClCompile Include="Example\TaskGunExample.c" />
     <ClCompile Include="Main.c" />
     <ClCompile Include="Source\Base.c" />
@@ -152,6 +156,7 @@
     <ClCompile Include="Source\FsmLine.c" />
     <ClCompile Include="Source\FsmNode.c" />
     <ClCompile Include="Source\Log.c" />
+    <ClCompile Include="TEST.C" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

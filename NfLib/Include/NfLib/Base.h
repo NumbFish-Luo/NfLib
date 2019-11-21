@@ -12,20 +12,25 @@
 #define __LPC177X_8X__ 0
 
 #if __WINDOWS_10__ /////////////////////////////////////////////////////////////
+
 #include <stdio.h>
 #include <Windows.h>
 #define GET_TICK_COUNT() (u32)GetTickCount64()
 #pragma warning(disable:4996)
+
 #elif __LPC177X_8X__ ///////////////////////////////////////////////////////////
+
 #include "base/time.h"
 #define GET_TICK_COUNT() get_tick()
+
 #endif // __WINDOWS_10__
-#endif // _LAYER(0, "typedef")
+#endif // _LAYER(0, "macro")
 
 static const char* g_assertName = "none";
-inline Assert(bool isTrue, const char* name) { if (!isTrue) { g_assertName = name; while (1); } }
+inline Assert(bool isTrue, const char* name);
 
 #if _LAYER(0, "typedef") ///////////////////////////////////////////////////////
+
 typedef bool        Bit;
 typedef char*       Str;
 typedef const char* CStr;
@@ -39,7 +44,7 @@ typedef long long i64;
 
 #endif
 
-typedef unsigned char      u8, Byte;
+typedef unsigned char      u8 , Byte;
 typedef unsigned short     u16, Word;
 typedef unsigned int       u32, DWord;
 typedef unsigned long long u64, QWord;
@@ -68,10 +73,11 @@ typedef union {
 #endif // _LAYER(0, "typedef")
 
 #if _LAYER(0, "function") //////////////////////////////////////////////////////
+
 Bit GetBit(Byte byte, Byte i);
 void SetBit(Byte* byte, Byte i, Bit data);
 void EndianReverse(Byte byte[], size_t size);
-u8 ASC2BCD(u8* bcd, const u8* asc, u32 len); // ASCII to BCD
+void ASC2BCD(u8* bcd, const u8* asc, u16 bcdSize); // ASCII to BCD
 
 #endif // _LAYER(0, "function")
 

@@ -5,9 +5,9 @@ static void F1(int a, int b) { printf("F1 { a: %d, b: %d }", a, b); }
 static void F2(int a, int b) { printf("F2 { a: %d, b: %d }", a, b); }
 static void F3(int a, int b) { printf("F3 { a: %d, b: %d }", a, b); }
 
-typedef void (*Fn) (int a, int b);
-typedef struct { Fn F; int a; int b; } Args;
-static void Call_Fn(Args args) { if (args.F != 0) { args.F(args.a, args.b); } }
+typedef void (*Fn) (int a, int b); // 第一步, 抽出要调用的函数的格式
+typedef struct { Fn F; int a; int b; } Args; // 第二步, 将格式和参数打包到一起
+static void Call_Fn(Args args) { if (args.F != 0) { args.F(args.a, args.b); } } // 第三步, 定义参数函数
 
 TaskGun_DEF(Args, 6);
 TaskGun_IMPL(Args, 6);
