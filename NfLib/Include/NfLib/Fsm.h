@@ -7,11 +7,11 @@
 #include <NfLib/FsmLine.h>
 
 struct Fsm {
-    FsmNode*   currNode;
-    FsmNode*   nodes[Fsm_MaxNodeNum];
-    u8         size;
-    FsmArgType arg;
-    Fsm_ops* (*Ops) (void);
+    FsmNode*    currNode;
+    FsmNode*    nodes[Fsm_MaxNodeNum];
+    u8          size;
+    const char* args;
+    Fsm_ops*  (*Ops) (void);
 };
 
 struct Fsm_ops {
@@ -23,6 +23,6 @@ struct Fsm_ops {
     bool (*Run        ) (Fsm* this);
 };
 
-void Fsm_Init(Fsm* this, FsmArgType arg);
+void Fsm_Init(Fsm* this, const char* args);
 
 #endif // _NFLIB_FSM_H

@@ -3,7 +3,7 @@
 #include <NfLib/Array.h>
 #include <stdio.h>
 
-static void Print(const int* data, unsigned short len) {
+static void Print(const int* data, size_t len) {
     printf("{ ");
     while (len--) {
         printf("%d", *(data++));
@@ -20,7 +20,9 @@ void ArrayExample() {
     int* p = 0;
     bool ok = false;
 
-    printf("MaxSize = %d\n", Array(int, 123, _Init)(&a)->Ops()->MaxSize());
+    Array(int, 123, _Init)(&a);
+
+    printf("MaxSize = %lld\n", a.Ops()->MaxSize());
 
     a.Ops()->PushBack(&a, 111);
     a.Ops()->PushBack(&a, 222);

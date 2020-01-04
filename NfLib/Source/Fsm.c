@@ -38,7 +38,7 @@ static bool Start(Fsm* this, const char name[FsmName_MaxLen]) {
 
 static bool Run(Fsm* this) {
     if (this->currNode == 0 || this->currNode->Func == 0) { return false; }
-    this->currNode->Func(this->currNode, this->arg);
+    this->currNode->Func(this->currNode, this->args);
     return true;
 }
 
@@ -46,11 +46,11 @@ static bool HandleEvent(Fsm* this, FsmEvent event) {
     u8 i = 0;
     u8 j = 0;
     const char* name = event.name;
-    if (strcmp(name, FsmNone) == 0) { return false; }
+    if (strcmp(name, "") == 0) { return false; }
     for (i = 0; i < this->currNode->lineSize; ++i) {
         if (this->currNode->lines[i] != 0 && strcmp(this->currNode->lines[i]->name, name) == 0) {
             if (this->currNode->lines[i]->Func != 0) {
-                this->currNode->lines[i]->Func(this->currNode->lines[i], this->arg);
+                this->currNode->lines[i]->Func(this->currNode->lines[i], this->args);
             }
             this->currNode = this->currNode->lines[i]->nextNode;
             for (j = 0; j < FsmNode_Timer_MaxNum; ++j) {
@@ -77,11 +77,11 @@ static Fsm_ops* Ops(void) {
     return &ops;
 }
 
-void Fsm_Init(Fsm* this, FsmArgType arg) {
+void Fsm_Init(Fsm* this, const char* args) {
     u8 i = 0;
     this->currNode = 0;
     for (i = 0; i < Fsm_MaxNodeNum; ++i) { this->nodes[i] = 0; }
     this->size = 0;
     this->Ops = Ops;
-    this->arg = arg;
+    this->args = args;
 }
